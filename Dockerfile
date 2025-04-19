@@ -3,7 +3,7 @@ ARG NODE_VERSION=22.13.0
 
 FROM node:${NODE_VERSION}-alpine
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 
 WORKDIR /usr/src/app
@@ -15,8 +15,8 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 
-RUN npm run build
+RUN npx prisma generate && npm run build
 
 EXPOSE 8000
 
-CMD npm run start
+CMD ["npm", "run", "start"]

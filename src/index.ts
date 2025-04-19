@@ -1,4 +1,4 @@
-import app from "./services/app";
+import app from "./configs/app";
 
 app.listen(8000, () => {
     console.log("Server is running on port 8000");
