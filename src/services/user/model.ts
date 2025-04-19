@@ -10,7 +10,8 @@ const User_Model = {
         await prisma.user.create({
             data : {
                 username : new Date().getTime() + '-user',
-                gender : 'male'
+                gender : 'male',
+                password : '12345'
             }
         });
     }
