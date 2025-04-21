@@ -4,8 +4,17 @@ import Users_Router from "@src/modules/users/users.router";
 import { Error_Handler } from "@src/middlewares/error.middleware";
 import { Not_Found_Handler } from "@src/middlewares/404.middleware";
 import Auth_Router from "@src/modules/auth/auth.router";
+import cors from 'cors';
+import env_config from "./env";
 
 const app : Express = express();
+
+app.use(cors({
+    origin : env_config.front_end_origin, 
+    credentials : true, 
+    exposedHeaders : ['set-cookie']
+}));
+
 app.use(express.json());
 
 app.use(morgan('dev'));
