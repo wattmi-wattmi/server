@@ -7,5 +7,6 @@ export interface Response_Interface<T> {
     message : string;
     success : boolean;
     pagination : null | Pagination_Interface;
+    token : null | string;
     error : Error | null | unknown[] | undefined;
 }

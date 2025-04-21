@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
-import { Api_Error } from '@src/lib/api/error.class';  // Your custom error class
-import { Response_Interface } from '@src/lib/api/response.type';
+import { Api_Error } from '@src/classes/error.classes';  // Your custom error class
+import { Response_Interface } from '@src/types/response.types';
 
 export const Error_Handler : ErrorRequestHandler = (
     err: Error | Api_Error,
@@ -13,7 +13,8 @@ export const Error_Handler : ErrorRequestHandler = (
             success : false, 
             message : err.message, 
             data : null,
-            error : err.errors,
+            error : err,
+            token : null,
             pagination : null
         }
         res.status(err.statusCode).json(response);
@@ -27,6 +28,7 @@ export const Error_Handler : ErrorRequestHandler = (
             message : error.message, 
             data : null,
             error,
+            token : null,
             pagination : null
         }
     res.status(500).json(response);
