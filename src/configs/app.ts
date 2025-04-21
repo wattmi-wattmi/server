@@ -6,6 +6,8 @@ import { Not_Found_Handler } from "@src/middlewares/404.middleware";
 import Auth_Router from "@src/modules/auth/auth.router";
 import cors from 'cors';
 import env_config from "./env";
+import Me_Middleware from "@src/middlewares/me.middleware";
+import cookieParser from 'cookie-parser';
 
 const app : Express = express();
 
@@ -18,12 +20,14 @@ app.use(cors({
 app.use(express.json());
 
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 
 
 app.get("/", async (req: express.Request, res: express.Response) => {
     res.status(200).send("Hello World!");
 });
+app.use(Me_Middleware);
 
 app.use('/api/users', Users_Router);
 app.use('/api/auth', Auth_Router);

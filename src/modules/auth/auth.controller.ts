@@ -13,6 +13,7 @@ const Auth_Controller = {
         send_success_response({ res, data: user, token });
     },
 
+
     async login (req : Request, res : Response) {
         const login_data = req.body;
         const user = await Auth_Service.login(login_data);
@@ -28,6 +29,11 @@ const Auth_Controller = {
             sameSite: 'strict'
         });
         send_success_response({ res, message: 'successfully logged out' });
+    }, 
+
+    async me(req : Request, res : Response) {
+        const me = req.me;
+        send_success_response({ res, data : me, message : 'authorized'})
     }
 }
 

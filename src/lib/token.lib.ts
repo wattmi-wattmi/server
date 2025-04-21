@@ -1,3 +1,4 @@
+import { Unauthorized_Error } from "@src/classes/error.classes";
 import env_config from "@src/configs/env";
 import jwt from 'jsonwebtoken';
 
@@ -9,7 +10,12 @@ const Token_Lib = {
         }); 
     },
     verify(token : string) {
-        return jwt.verify(token, this.secret_key) as { username : string };
+        try {
+            return jwt.verify(token, this.secret_key) as { username : string };
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
     }
 }
 
