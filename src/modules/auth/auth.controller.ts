@@ -3,6 +3,8 @@ import Auth_Service from "./auth.service";
 import { send_success_response } from "@src/lib/response.lib";
 import Token_Lib from "@src/lib/token.lib";
 import env_config from "@src/configs/env";
+import Users_Service from "@src/modules/users/users.service";
+import {Unauthorized_Error} from "@src/classes/error.classes";
 
 const Auth_Controller = {
     async register(req: Request, res: Response) {
@@ -34,6 +36,13 @@ const Auth_Controller = {
     async me(req : Request, res : Response) {
         const me = req.me;
         send_success_response({ res, data : me, message : 'authorized'})
+    },
+
+    async update_me(req : Request, res : Response) {
+        const me = req.me;
+        if(!me) throw new Unauthorized_Error();
+        const new_me = await Auth_Service.update_user(me.id, req.body);
+        send_success_response({ res, data : new_me, message : 'updated successfully'});
     }
 }
 
