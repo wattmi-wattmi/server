@@ -12,12 +12,9 @@
     "skipLibCheck": true, 
     "paths": {
         "@src/*" : ["src/*"],
-    }
+    }, 
   },
-  "include": [
-    "src/**/*",
-    "custom.d.ts"
-  ],
+  "include": [ "src/**/*", "custom.d.ts" ],
   "exclude": [
     "node_modules"
   ]

@@ -2,20 +2,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 generator client {
   provider = "prisma-client-js"
-  output = "../node_modules/@prisma/generated"
+  output   = "../node_modules/@prisma/generated"
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  username   String   @unique
-  password String
-  name    String?
-  region String?
-  interests String?
-  gender String
-  about_me String?
+  id             Int     @id @default(autoincrement())
+  username       String  @unique
+  password       String
+  name           String?
+  region         String?
+  interests      String?
+  gender         String
+  about_me       String?
   status_message String?
-  profile String?
+  profile        String?
+  age            Int?
 }
