@@ -53,12 +53,24 @@ const Auth_Controller = {
 }
 
 function set_response_cookies(res: Response, token: string) {
+    // Extract domain from front_end_origin if in production
+    let cookieDomain;
+    if (process.env.NODE_ENV === 'production' && env_config.front_end_origin) {
+        try {
+            const url = new URL(env_config.front_end_origin);
+            cookieDomain = url.hostname;
+        } catch (error) {
+            console.error('Invalid front_end_origin URL:', env_config.front_end_origin);
+            cookieDomain = undefined;
+        }
+    }
+
     res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 86400000 * 7,
-        domain: process.env.NODE_ENV === 'production' ? env_config.front_end_origin : undefined,
+        domain: cookieDomain,
         path: '/'
     });
 }
