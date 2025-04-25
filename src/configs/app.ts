@@ -11,8 +11,10 @@ import cookieParser from 'cookie-parser';
 
 const app : Express = express();
 
+const front_end_origin = env_config.front_end_origin;
+console.log('frontend origin', front_end_origin);
 app.use(cors({
-    origin : env_config.front_end_origin, 
+    origin : front_end_origin,
     credentials : true, 
     exposedHeaders : ['set-cookie']
 }));

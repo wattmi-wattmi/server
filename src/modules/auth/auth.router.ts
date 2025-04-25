@@ -8,6 +8,7 @@ Auth_Router.post('/logout', Auth_Controller.logout);
 Auth_Router.post('/login', Auth_Controller.login);
 Auth_Router.post('/me', Auth_Middleware, Auth_Controller.me);
 Auth_Router.put('/me', Auth_Middleware, Auth_Controller.update_me);
+Auth_Router.post('/check-username', Auth_Controller.check_username);
 
 
 export default Auth_Router;

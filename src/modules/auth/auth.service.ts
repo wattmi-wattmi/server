@@ -60,6 +60,11 @@ const Auth_Service = {
             where : { id },
             data
         });
+    },
+    async check_username(username : string) {
+        if(!is_username_long_enough(username)) throw new Api_Error(500, 'username is too short, must be at least 3 characters');
+        if(!is_valid_username(username)) throw new Api_Error(500, 'not a valid username');
+        if(await this.is_user_already_exist(username)) throw new Api_Error(500, 'username already exists');
     }
 }
 

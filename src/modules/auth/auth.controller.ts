@@ -35,7 +35,8 @@ const Auth_Controller = {
 
     async me(req : Request, res : Response) {
         const me = req.me;
-        send_success_response({ res, data : me, message : 'authorized'})
+        const token = me ? Token_Lib.sign(me.username) : '';
+        send_success_response({ res, data : me, message : 'authorized', token })
     },
 
     async update_me(req : Request, res : Response) {
@@ -43,6 +44,11 @@ const Auth_Controller = {
         if(!me) throw new Unauthorized_Error();
         const new_me = await Auth_Service.update_user(me.id, req.body);
         send_success_response({ res, data : new_me, message : 'updated successfully'});
+    },
+    async check_username(req : Request, res : Response) {
+        const username = req.body.username;
+        await Auth_Service.check_username(username);
+        send_success_response({ res, data : username, message : 'username is valid and available'});
     }
 }
 
