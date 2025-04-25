@@ -6,21 +6,6 @@ import env_config from "@src/configs/env";
 import Users_Service from "@src/modules/users/users.service";
 import {Unauthorized_Error} from "@src/classes/error.classes";
 
-// Helper function to extract domain from front_end_origin URL
-function extractDomainFromOrigin(): string | undefined {
-    if (process.env.NODE_ENV === 'production') {
-        try {
-            // Parse the URL and extract hostname (domain without protocol)
-            const url = new URL(env_config.front_end_origin);
-            return url.hostname;
-        } catch (error) {
-            console.error('Error parsing front_end_origin:', error);
-            // Fallback to undefined if parsing fails
-            return undefined;
-        }
-    }
-    return undefined;
-}
 
 const Auth_Controller = {
     async register(req: Request, res: Response) {
@@ -42,13 +27,11 @@ const Auth_Controller = {
 
     async logout(req: Request, res: Response) {
         // Get domain using the helper function
-        const domain = extractDomainFromOrigin();
 
         res.clearCookie('token', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-            domain: domain,
             path: '/'
         });
         send_success_response({ res, message: 'successfully logged out' });
@@ -74,15 +57,12 @@ const Auth_Controller = {
 }
 
 function set_response_cookies(res: Response, token: string) {
-    // Get domain using the helper function
-    const domain = extractDomainFromOrigin();
 
     res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 86400000 * 7,
-        domain: domain,
         path: '/'
     });
 }
