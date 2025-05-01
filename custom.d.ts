@@ -13,6 +13,7 @@ declare global {
                 about_me: string | null;
                 status_message: string | null;
                 profile: string | null;
+                age: number | null;
             } | null;
         }
     }
