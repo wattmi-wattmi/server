@@ -14,6 +14,7 @@ declare global {
                 status_message: string | null;
                 profile: string | null;
                 age: number | null;
+                active_now : boolean;
             } | null;
         }
     }
