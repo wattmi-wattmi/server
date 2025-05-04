@@ -14,6 +14,7 @@ interface User_Params_Interface {
     status_message? : string | null;
     profile? : string | null;
     age? : number | null;
+    active_now? : boolean;
 }
 
 const Auth_Service = {

@@ -20,4 +20,5 @@ model User {
   status_message String?
   profile        String?
   age            Int?
+  active_now     Boolean @default(false)
 }
