@@ -11,6 +11,10 @@ const Users_Service = {
             where: where_queries,
             take : queries.limit,
             skip : (queries.page - 1) * queries.limit,
+            orderBy: [
+                { active_now: 'desc' },
+                { id: 'desc' } // Using id as a proxy for recency since there's no updatedAt field
+            ]
         });
         return { users, total_users : total, total_pages : Math.ceil(total / queries.limit) };
     },
