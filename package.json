@@ -13,7 +13,7 @@
         "seed:users": "tsx scripts/seed-users.ts"
     },
     "dependencies": {
-        "@prisma/client": "^6.6.0",
+        "@prisma/client": "^6.8.2",
         "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
@@ -33,7 +33,7 @@
         "@types/jsonwebtoken": "^9.0.9",
         "@types/morgan": "^1.9.9",
         "@types/node": "^22.14.1",
-        "prisma": "^6.6.0",
+        "prisma": "^6.8.2",
         "tsconfig-paths": "^4.2.0",
         "tsx": "^4.19.3"
     },
